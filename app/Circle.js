@@ -7,6 +7,7 @@ const {
   Path,
   Text,
   Group,
+  LinearGradient,
   RadialGradient,
 } = ReactART
 
@@ -18,34 +19,53 @@ var circlePath = new Path()
   .close()
 
 export default ({x, y, r}) => {
-  var gradient = new RadialGradient(
+  var gradient = new LinearGradient(
     {
-      '.1': 'black',
-      '1': 'rgba(255,255,255,0)'
+      '.1': 'rgba(20, 20, 20, 0.5)',
+      '.8': 'rgba(255,255,255,0.7)'
     },
-    "100","100","0","0","0","200"
+    x, y, r, r, x, y
+  )
+
+  var radial = new RadialGradient(
+    {
+      '0.4': 'rgba(255, 255, 255, .1)',
+      '.7': 'rgba(255,255,255, 0.5)',
+      '.5': 'rgba(20, 20, 20, 0.5)',
+    },
+    x, y, 2 * r, 2 * r, x, y
   )
 
   var path = new Path(x, y, r)
-    .moveTo(x, y)
+    .moveTo(x - r, y)
     .arc(2 * r, 0, 1, 1)
     .arc(-2 * r, 0, 1, 1)
     .close()
 
+  var  shadow = new Path(x, y, r)
+    .moveTo(x - r, y)
+    .arc(2 * r, 0, 1, 1)
+    .arc(-2 * r, 0, 1, 1)
+    .close()
+
+
   return (
-    <Group>
-    <Shape
-      d={path}
-      fill={gradient}
-      stroke="orange"
-      style={styles.shape}
-    />
-    <Text
-      font="32px Helvetica"
-      fill="gray"
-     >Boingo</Text>
+    <Group
+    >
+      <Shape
+        d={shadow}
+        fill={radial}
+      />
+      <Shape
+        d={path}
+        fill={gradient}
+        stroke="rgba(90, 190, 20, 0.3)"
+        strokeWidth="2"
+      />
     </Group>
   )
+
+
 }
 
 const styles = StyleSheet.create({
@@ -56,4 +76,15 @@ const styles = StyleSheet.create({
       height: 2,
     },
   },
+  group: {
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    backgroundColor: 'green',
+    marginTop: 400,
+    opacity: 0.1,
+
+  }
 });

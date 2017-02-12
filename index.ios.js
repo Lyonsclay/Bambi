@@ -33,13 +33,14 @@ class ColorSwitchExample extends React.Component {
       <View>
         <Switch
           onValueChange={(value) => this.setState({colorFalseSwitchIsOn: value})}
-          onTintColor="#00ff00"
-          thumbTintColor="#0000ff"
-          value={this.state.colorFalseSwitchIsOn} />
+          tintColor="gray"
+          onTintColor="gray"
+          thumbTintColor="#ffffff"
+          value={this.state.colorFalseSwitchIsOn}
+          style={styles.switch}
+        />
         <Switch
           onValueChange={(value) => this.setState({colorTrueSwitchIsOn: value})}
-          thumbTintColor="#0000ff"
-          tintColor="#ff0000"
           value={this.state.colorTrueSwitchIsOn} />
       </View>
     );
@@ -60,14 +61,6 @@ export default class Bambi extends Component {
         <Surface
           width={300}
           height={300}
-          style={{
-            borderWidth: 2,
-            borderColor: 'orange',
-            shadowColor: 'black',
-            shadowOffset: {width: 20, height: 20},
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-          }}
         >
           <Circle x={100} y={200} r={50}/>
         </Surface>
@@ -84,12 +77,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     /* backgroundColor: '#F05FCF',*/
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 20,
-      height: 20,
-    },
   },
+  surface: {
+    borderWidth: 2,
+    borderColor: 'orange',
+    shadowColor: 'black',
+    shadowOffset: {width: 20, height: 20},
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+  },
+  switch: {
+
+  }
 });
 
 AppRegistry.registerComponent('Bambi', () => Bambi);
